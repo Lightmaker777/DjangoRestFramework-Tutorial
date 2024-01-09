@@ -13,8 +13,8 @@ from rest_framework.exceptions import ValidationError
 class BookList(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAdminOrReadOnly,permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly,permissions.IsAuthenticatedOrReadOnly]
     
     def perform_create(self, serializer):
         try :
@@ -26,8 +26,8 @@ class BookList(generics.ListCreateAPIView):
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAdminOrReadOnly,permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly,permissions.IsAuthenticatedOrReadOnly]
     
     def perform_update(self, serializer):
         try:
