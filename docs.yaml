@@ -1,0 +1,146 @@
+swagger: '2.0'
+info:
+  title: Book API
+  description: API for books
+  termsOfService: https://www.google.com/policies/terms
+  contact:
+    email: contact@bookapi.local
+  license:
+    name: MIT License
+  version: v1
+host: 127.0.0.1:8000
+schemes:
+- http
+basePath: /api/v1
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+- Basic: []
+paths:
+  /books/:
+    get:
+      operationId: books_list
+      description: Retrieve a list of books
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Book'
+      tags:
+      - books
+    post:
+      operationId: books_create
+      description: create a new book
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Book'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Book'
+      tags:
+      - books
+    parameters: []
+  /books/{id}/:
+    get:
+      operationId: books_read
+      description: Retrieve a books by ID
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Book'
+      tags:
+      - books
+    put:
+      operationId: books_update
+      description: Update a single book
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Book'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Book'
+      tags:
+      - books
+    patch:
+      operationId: books_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Book'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Book'
+      tags:
+      - books
+    delete:
+      operationId: books_delete
+      description: Delete a book
+      parameters: []
+      responses:
+        '204':
+          description: ''
+      tags:
+      - books
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this book.
+      required: true
+      type: integer
+definitions:
+  Book:
+    required:
+    - title
+    - author
+    - published_date
+    type: object
+    properties:
+      id:
+        title: ID
+        type: integer
+        readOnly: true
+      title:
+        title: Title
+        type: string
+        maxLength: 200
+        minLength: 1
+      author:
+        title: Author
+        type: string
+        maxLength: 200
+        minLength: 1
+      description:
+        title: Description
+        type: string
+      published_date:
+        title: Published date
+        type: string
+        format: date
+      is_published:
+        title: Is published
+        type: boolean
